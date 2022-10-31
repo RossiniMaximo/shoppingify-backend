@@ -14,8 +14,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use([itemsRoutes, listsRoutes, myRoutes, userRoutes]);
+
 app.use(express.static("public"));
-app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: path.join(__dirname, "public") });
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(path.join(__dirname, "../dist/index.html")));
 });
 export { app };

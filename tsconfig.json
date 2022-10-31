@@ -1,3 +1,7 @@
 {
-  "compilerOptions": {}
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2016",
+    "moduleResolution": "Node"
+  }
 }
