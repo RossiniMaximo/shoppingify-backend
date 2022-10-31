@@ -10,7 +10,6 @@ const corsOptions = {
   origin: "https://shoppingify-front.vercel.app",
   optionsSuccessStatus: 200,
 };
-app.use(express.static("dist"));
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -18,7 +17,7 @@ app.use([itemsRoutes, listsRoutes, myRoutes, userRoutes]);
 
 app.use(express.static("public"));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(path.join(__dirname, "../dist/index.html")));
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "public") });
 });
 export { app };
