@@ -10,6 +10,7 @@ const corsOptions = {
   origin: "https://shoppingify-front.vercel.app",
   optionsSuccessStatus: 200,
 };
+app.use(express.static("dist"));
 
 app.use(cors(corsOptions));
 app.use(express.json());
