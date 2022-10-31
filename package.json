@@ -20,6 +20,6 @@
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "dev": "npx src/index.ts"
+    "dev": "node src/index.ts"
   }
 }
