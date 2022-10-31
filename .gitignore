@@ -1,0 +1,6 @@
+.env
+Docs.txt
+INSTRUCTIONS.md
+items.ts
+node_modules
+dist
