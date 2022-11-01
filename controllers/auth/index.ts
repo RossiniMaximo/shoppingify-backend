@@ -1,6 +1,5 @@
 import { createToken, getSHA256ofString } from "../../lib";
-import { User } from "../../src/models";
-import { Auth } from "../../src/models/Auth";
+import { Auth } from "../../models/Auth";
 
 export const findOrCreateAuth = async (data) => {
   const { email, password, userId } = data;

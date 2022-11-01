@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const shopList_1 = require("../controllers/shopList");
+const router = (0, express_1.Router)();
+router.get("/shopping-list/:id", shopList_1.getShoppingListById);
+router.post("/shopping-list/:id/item", shopList_1.getShoppingListItems);
+router.post("/shopping-list", shopList_1.createShoppingList);
+router.post("/shopping-list/:id/items", shopList_1.addItemToShoplist);
+router.delete("/shopping-list/:id", shopList_1.deleteShoppingListById);
+router.delete("/shopping-list/:id/item", shopList_1.deleteItemFromShopList);
+router.put("/shopping-list/:id", shopList_1.updateShoppingListById);
+exports.default = router;
