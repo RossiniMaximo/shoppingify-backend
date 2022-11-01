@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { updateShoppingListById } from "../controllers/shopList";
+import { updateShoppingListById } from "../src/controllers/shopList";
 
 const router = Router();
 

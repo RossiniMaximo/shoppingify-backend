@@ -17,5 +17,3 @@ async function main() {
   }
 }
 main();
-
-export const handler = async (event: any) => {};
