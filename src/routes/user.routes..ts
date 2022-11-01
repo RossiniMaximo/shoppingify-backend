@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { checkPassword } from "../src/controllers/auth";
-import { getMyShoppingLists } from "../src/controllers/shopList";
-import { findOrCreateUser, getAllUsers, getMe } from "../src/controllers/user";
-import { authMiddlware } from "../src/lib/middlewares/auth";
+import { checkPassword } from "../controllers/auth";
+import { getMyShoppingLists } from "../controllers/shopList";
+import { findOrCreateUser, getAllUsers, getMe } from "../controllers/user";
+import { authMiddlware } from "../lib/middlewares/auth";
 
 const router = Router();
 

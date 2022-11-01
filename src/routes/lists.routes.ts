@@ -7,7 +7,7 @@ import {
   addItemToShoplist,
   deleteItemFromShopList,
   updateShoppingListById,
-} from "../src/controllers/shopList";
+} from "../controllers/shopList";
 
 const router = Router();
 

@@ -1,12 +1,12 @@
 import express from "express";
-import itemsRoutes from "../routes/items.routes";
-import listsRoutes from "../routes/lists.routes";
-import myRoutes from "../routes/me.routes";
-import userRoutes from "../routes/user.routes.";
+import itemsRoutes from "./routes/items.routes";
+import listsRoutes from "./routes/lists.routes";
+import myRoutes from "./routes/me.routes";
+import userRoutes from "./routes/user.routes.";
 import cors from "cors";
 const app = express();
 const corsOptions = {
-  origin: "https://shoppingify-front-geqczjolf-rossinimaximo.vercel.app",
+  origin: ["https://shoppingify-front-geqczjolf-rossinimaximo.vercel.app"],
   optionsSuccessStatus: 200,
 };
 

@@ -4,7 +4,7 @@ import {
   createItem,
   getItemByName,
   updateItemsToAlgolia,
-} from "../src/controllers/item";
+} from "../controllers/item";
 
 const router = Router();
 
