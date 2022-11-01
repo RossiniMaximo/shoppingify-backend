@@ -20,9 +20,9 @@
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "dev": "ts-node src/index",
+    "dev": "ts-node index",
     "tsc": "tsc",
     "build": "tsc -p .",
-    "start": "node dist/src/index"
+    "start": "node index.js"
   }
 }
