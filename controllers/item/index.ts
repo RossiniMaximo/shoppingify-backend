@@ -1,4 +1,4 @@
-import { Item } from "../../models";
+import { Item } from "../../src/models";
 import { index } from "../../database/algolia";
 
 export const getItemsSortedByCategory = async (req, res) => {

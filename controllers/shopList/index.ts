@@ -1,5 +1,5 @@
 import { index } from "../../database/algolia";
-import { Item, Shoplist } from "../../models";
+import { Item, Shoplist } from "../../src/models";
 
 // auth middleware
 export const createShoppingList = async (req, res) => {

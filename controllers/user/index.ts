@@ -1,5 +1,5 @@
 import { createToken } from "../../lib";
-import { User } from "../../models";
+import { User } from "../../src/models";
 import { findOrCreateAuth } from "../auth";
 
 export const findOrCreateUser = async (req, res) => {
