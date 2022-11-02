@@ -13,7 +13,10 @@ var cors_1 = __importDefault(require("cors"));
 var app = (0, express_1.default)();
 exports.app = app;
 var corsOptions = {
-    origin: ["https://shoppingify-front-geqczjolf-rossinimaximo.vercel.app"],
+    origin: [
+        "https://shoppingify-front-geqczjolf-rossinimaximo.vercel.app",
+        "https://shoppingify-front.vercel.app'",
+    ],
     optionsSuccessStatus: 200,
 };
 app.use((0, cors_1.default)(corsOptions));
