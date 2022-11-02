@@ -9,6 +9,7 @@ const corsOptions = {
   origin: [
     "https://shoppingify-front-geqczjolf-rossinimaximo.vercel.app",
     "https://shoppingify-front.vercel.app",
+    "http://localhost:3000",
   ],
   optionsSuccessStatus: 200,
 };

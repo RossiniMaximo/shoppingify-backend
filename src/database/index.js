@@ -9,3 +9,4 @@ exports.sequelize = new sequelize_1.Sequelize(process.env.DATABASE_NAME, process
     dialectModule: require("mysql2"),
     port: 7022,
 });
+// Railway port :7022

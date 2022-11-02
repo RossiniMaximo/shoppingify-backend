@@ -51,11 +51,10 @@ function main() {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    /* await sequelize.sync({ alter: true }); */
-                    return [4 /*yield*/, database_1.sequelize.authenticate()];
+                    return [4 /*yield*/, database_1.sequelize.sync({ force: true })];
                 case 1:
-                    /* await sequelize.sync({ alter: true }); */
                     _a.sent();
+                    /*  await sequelize.authenticate(); */
                     app_1.app.listen(PORT, function () { return console.log("server running on port :", PORT); });
                     return [3 /*break*/, 3];
                 case 2:

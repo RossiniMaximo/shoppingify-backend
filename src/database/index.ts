@@ -12,3 +12,4 @@ export const sequelize = new Sequelize(
     port: 7022,
   }
 );
+// Railway port :7022
