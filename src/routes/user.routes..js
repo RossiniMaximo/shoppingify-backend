@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var auth_1 = require("../src/controllers/auth");
-var shopList_1 = require("../src/controllers/shopList");
-var user_1 = require("../src/controllers/user");
+var auth_1 = require("../controllers/auth");
+var shopList_1 = require("../controllers/shopList");
+var user_1 = require("../controllers/user");
 var router = (0, express_1.Router)();
 router.get("/users", user_1.getAllUsers);
 router.get("/users/login", auth_1.checkPassword);

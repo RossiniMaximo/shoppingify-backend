@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var shopList_1 = require("../src/controllers/shopList");
+var shopList_1 = require("../controllers/shopList");
 var router = (0, express_1.Router)();
 router.get("/shopping-list/:id", shopList_1.getShoppingListById);
 router.post("/shopping-list/:id/item", shopList_1.getShoppingListItems);

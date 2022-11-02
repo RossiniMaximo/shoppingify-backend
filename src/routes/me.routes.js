@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var shopList_1 = require("../src/controllers/shopList");
+var shopList_1 = require("../controllers/shopList");
 var router = (0, express_1.Router)();
 // Deletes a item from my shopping list.
 router.delete("/my-shopping-list/:id");
