@@ -15,7 +15,7 @@ exports.app = app;
 var corsOptions = {
     origin: [
         "https://shoppingify-front-geqczjolf-rossinimaximo.vercel.app",
-        "https://shoppingify-front.vercel.app'",
+        "https://shoppingify-front.vercel.app",
     ],
     optionsSuccessStatus: 200,
 };
