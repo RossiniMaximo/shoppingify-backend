@@ -143,13 +143,9 @@ export const addItemToShoplist = async (req, res) => {
       const itemsArr = await Promise.allSettled(
         items.map(async (i) => {
           console.log("Item :", i);
-          let result = await Item.findOne({
-            where: {
-              name: i,
-            },
-          });
+          let result = await Item.findOne({ where: { name: i } });
+          if(result === null)
           console.log("result :", result);
-
           return result;
         })
       );
