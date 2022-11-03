@@ -13,3 +13,4 @@ export const sequelize = new Sequelize(
   }
 );
 // Railway port :7022
+// MySqlWorkbench port :3306
