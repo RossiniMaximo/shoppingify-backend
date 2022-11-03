@@ -144,9 +144,13 @@ export const addItemToShoplist = async (req, res) => {
         items.map(async (i) => {
           console.log("Item :", i);
           let result = await Item.findOne({ where: { name: i } });
-          if(result === null)
-          console.log("result :", result);
-          return result;
+          if (result === null) {
+            console.error("There wasn't a match");
+          } else {
+            console.log("result :", result);
+            await newShoppingList.addItem(result);
+            return result;
+          }
         })
       );
       console.log("Array de items:", itemsArr);
