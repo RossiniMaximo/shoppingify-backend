@@ -148,7 +148,7 @@ export const addItemToShoplist = async (req, res) => {
             console.error("There wasn't a match");
           } else {
             console.log("result :", result);
-            await newShoppingList.addItem(result);
+            await newShoppingList.addItem(result.get("id"));
             return result;
           }
         })
