@@ -5,8 +5,8 @@ import "./models/Auth";
 import "./models/User";
 import "./models/Item";
 import "./models/ShopLists";
-import { items } from "../items";
-import { Item } from "./models/Item";
+/* import { items } from "../items";
+import { Item } from "./models/Item"; */
 
 const PORT = process.env.PORT || 5500;
 
