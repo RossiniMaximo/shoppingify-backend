@@ -142,11 +142,13 @@ export const addItemToShoplist = async (req, res) => {
       ); */
       const itemsArr = await Promise.allSettled(
         items.map(async (i) => {
-          return await Item.findOne({
+          console.log("Item :", i);
+          let result = await Item.findOne({
             where: {
               name: i,
             },
           });
+          return result;
         })
       );
       console.log("Array de items:", itemsArr);
