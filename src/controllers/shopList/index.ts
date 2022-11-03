@@ -5,9 +5,13 @@ import { Item, Shoplist } from "../../models";
 export const createShoppingList = async (req, res) => {
   try {
     const { title, userId } = req.body;
+    console.log({ title });
+    console.log({ userId });
     const [newShopList, created] = await Shoplist.findOrCreate({
       where: { title, owner: userId },
     });
+    console.log("NEW SHOPPING LIST :", newShopList);
+
     res.send(newShopList);
   } catch (error) {
     return { error: error.message };
