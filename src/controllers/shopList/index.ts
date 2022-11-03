@@ -148,6 +148,8 @@ export const addItemToShoplist = async (req, res) => {
               name: i,
             },
           });
+          console.log("result :", result);
+
           return result;
         })
       );
