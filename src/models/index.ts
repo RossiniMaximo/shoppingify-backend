@@ -16,7 +16,6 @@ User.hasMany(Shoplist, {
   sourceKey: "id",
 });
 Shoplist.belongsTo(User, {
-  foreignKey: "owner",
   targetKey: "id",
 });
 Shoplist.hasMany(Item, { foreignKey: "owner" });

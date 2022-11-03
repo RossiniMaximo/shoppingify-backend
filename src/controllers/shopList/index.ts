@@ -129,6 +129,15 @@ export const addItemToShoplist = async (req, res) => {
     if (shoppingList === null) {
       throw { error: { message: "Shopping list not found." } };
     } else {
+      /*   await Promise.allSettled(
+        items.map(async (i) => {
+          const item = await index.search(i, {
+            hitsPerPage: 1,
+            attributesToHighlight: [],
+          });
+          return itemsIds.push(item.hits[0].objectID);
+        })
+      ); */
       await Promise.allSettled(
         items.map(async (i) => {
           let result = await Item.findOne({ where: { name: i } });
@@ -137,7 +146,7 @@ export const addItemToShoplist = async (req, res) => {
           } else {
             const itemDataValueId = result.getDataValue("id");
             console.log("itemDataValueId =", itemDataValueId);
-            await shoppingList.addItem(itemDataValueId);
+            await shoppingList.addItem([result, itemDataValueId]);
             return result;
           }
         })
