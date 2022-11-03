@@ -140,7 +140,7 @@ export const addItemToShoplist = async (req, res) => {
           return itemsIds.push(item.hits[0].objectID);
         })
       ); */
-      const itemsArr = await Promise.allSettled(
+      await Promise.allSettled(
         items.map(async (i) => {
           console.log("Item :", i);
           let result = await Item.findOne({ where: { name: i } });
@@ -148,12 +148,16 @@ export const addItemToShoplist = async (req, res) => {
             console.error("There wasn't a match");
           } else {
             console.log("result :", result);
-            await newShoppingList.addItem(result.get("id"));
+            const itemId = result.get("id");
+            console.log("ITEM ID :", itemId);
+            const itemDataValueId = result.getDataValue("id");
+            console.log("itemDataValueId =", itemDataValueId);
+
+            await newShoppingList.addItem(itemDataValueId);
             return result;
           }
         })
       );
-      console.log("Array de items:", itemsArr);
 
       /* await newShoppingList.addItems(itemsIds); */
       res.status(201).send(true);
