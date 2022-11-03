@@ -11,8 +11,6 @@ export const createShoppingList = async (req, res) => {
       where: { title, owner: userId },
       defaults: { title, owner: userId },
     });
-    console.log("NEW SHOPPING LIST :", newShopList);
-
     return res.send(newShopList);
   } catch (error) {
     return { error: error.message };
@@ -85,11 +83,18 @@ export const getShoppingListItems = async (req, res) => {
     const vegetables = [];
     const dairy = [];
     let newShoppinglist;
-    const shoppingListId = req.params.id;
+    const shoppingListId = req.params.id as number;
+    console.log("shoppingListId :", shoppingListId);
+
     const shoppinglist = await Shoplist.findByPk(shoppingListId);
+    console.log({ shoppinglist });
+
     newShoppinglist = shoppinglist;
+    console.log({ newShoppinglist });
     const items = await newShoppinglist.getItems();
-    items.map((i) => {
+    console.log({ items });
+
+    const iterator = items.map((i) => {
       if (i.category == "Vegetables") {
         vegetables.push(i);
       }
@@ -109,6 +114,8 @@ export const getShoppingListItems = async (req, res) => {
         beverages.push(i);
       }
     });
+    console.log({ iterator });
+
     return res.send({ meat, vegetables, beverages, dairy, pasta, fruit });
   } catch (error) {
     return res.status(500).send({ error: error.message });
