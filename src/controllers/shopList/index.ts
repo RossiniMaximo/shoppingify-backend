@@ -13,7 +13,7 @@ export const createShoppingList = async (req, res) => {
     });
     console.log("NEW SHOPPING LIST :", newShopList);
 
-    res.send(newShopList);
+    return res.send(newShopList);
   } catch (error) {
     return { error: error.message };
   }
