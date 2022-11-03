@@ -84,17 +84,12 @@ export const getShoppingListItems = async (req, res) => {
     const dairy = [];
     let newShoppinglist;
     const shoppingListId = req.params.id as number;
-    console.log("shoppingListId :", shoppingListId);
-
     const shoppinglist = await Shoplist.findByPk(shoppingListId);
-    console.log({ shoppinglist });
-
     newShoppinglist = shoppinglist;
-    console.log({ newShoppinglist });
     const items = await newShoppinglist.getItems();
     console.log({ items });
 
-    const iterator = items.map((i) => {
+    items.map((i) => {
       if (i.category == "Vegetables") {
         vegetables.push(i);
       }
@@ -114,8 +109,6 @@ export const getShoppingListItems = async (req, res) => {
         beverages.push(i);
       }
     });
-    console.log({ iterator });
-
     return res.send({ meat, vegetables, beverages, dairy, pasta, fruit });
   } catch (error) {
     return res.status(500).send({ error: error.message });
@@ -123,21 +116,26 @@ export const getShoppingListItems = async (req, res) => {
 };
 
 export const addItemToShoplist = async (req, res) => {
-  const shoplistId = req.params.id;
+  const shoppingListId = req.params.id;
+  console.log({ shoppingListId });
+
   const { items } = req.body;
+  console.log(items);
+
   let itemsIds = [];
   let newShoppingList;
 
   try {
     const shoppingList = await Shoplist.findOne({
       where: {
-        id: shoplistId,
+        id: shoppingListId,
       },
     });
     if (shoppingList === null) {
       throw { error: { message: "Shopping list not found." } };
     } else {
       newShoppingList = shoppingList;
+      console.log({ newShoppingList });
     }
     await Promise.allSettled(
       items.map(async (i) => {
@@ -149,6 +147,9 @@ export const addItemToShoplist = async (req, res) => {
       })
     );
     await newShoppingList.addItems(itemsIds);
+    console.log({ itemsIds });
+
+    console.log({ newShoppingList });
     res.status(201).send(true);
   } catch (error) {
     return res.status(500).send({ error: error.message || error });
