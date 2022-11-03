@@ -9,6 +9,7 @@ export const createShoppingList = async (req, res) => {
     console.log({ userId });
     const [newShopList, created] = await Shoplist.findOrCreate({
       where: { title, owner: userId },
+      defaults: { title, owner: userId },
     });
     console.log("NEW SHOPPING LIST :", newShopList);
 
