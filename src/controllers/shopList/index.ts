@@ -87,7 +87,6 @@ export const getShoppingListItems = async (req, res) => {
     const shoppinglist = await Shoplist.findByPk(shoppingListId);
     newShoppinglist = shoppinglist;
     const items = await newShoppinglist.getItems();
-    console.log({ items });
 
     items.map((i) => {
       if (i.category == "Vegetables") {

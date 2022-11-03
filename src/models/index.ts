@@ -19,9 +19,7 @@ Shoplist.belongsTo(User, {
   foreignKey: "owner",
   targetKey: "id",
 });
-Shoplist.belongsToMany(Item, {
-  through: "list_item",
-});
+Shoplist.hasMany(Item, { foreignKey: "owner" });
 Item.belongsToMany(Shoplist, {
   through: "list_item",
 });
