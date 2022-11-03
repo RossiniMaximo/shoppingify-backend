@@ -131,7 +131,7 @@ export const addItemToShoplist = async (req, res) => {
       throw { error: { message: "Shopping list not found." } };
     } else {
       newShoppingList = shoppingList;
-      await Promise.allSettled(
+      /*   await Promise.allSettled(
         items.map(async (i) => {
           const item = await index.search(i, {
             hitsPerPage: 1,
@@ -139,10 +139,19 @@ export const addItemToShoplist = async (req, res) => {
           });
           return itemsIds.push(item.hits[0].objectID);
         })
+      ); */
+      const itemsArr = await Promise.allSettled(
+        items.map(async (i) => {
+          return await Item.findOne({
+            where: {
+              name: i,
+            },
+          });
+        })
       );
-      console.log({ itemsIds });
-      console.log({ newShoppingList });
-      await newShoppingList.addItems(itemsIds);
+      console.log("Array de items:", itemsArr);
+
+      /* await newShoppingList.addItems(itemsIds); */
       res.status(201).send(true);
     }
   } catch (error) {
