@@ -117,10 +117,7 @@ export const getShoppingListItems = async (req, res) => {
 
 export const addItemToShoplist = async (req, res) => {
   const shoppingListId = req.params.id;
-  console.log({ shoppingListId });
-
   const { items } = req.body;
-  console.log(items);
 
   let itemsIds = [];
   let newShoppingList;
@@ -135,22 +132,20 @@ export const addItemToShoplist = async (req, res) => {
       throw { error: { message: "Shopping list not found." } };
     } else {
       newShoppingList = shoppingList;
+      await Promise.allSettled(
+        items.map(async (i) => {
+          const item = await index.search(i, {
+            hitsPerPage: 1,
+            attributesToHighlight: [],
+          });
+          return itemsIds.push(item.hits[0].objectID);
+        })
+      );
+      console.log({ itemsIds });
       console.log({ newShoppingList });
+      await newShoppingList.addItems(itemsIds);
+      res.status(201).send(true);
     }
-    await Promise.allSettled(
-      items.map(async (i) => {
-        const item = await index.search(i, {
-          hitsPerPage: 1,
-          attributesToHighlight: [],
-        });
-        return itemsIds.push(item.hits[0].objectID);
-      })
-    );
-    await newShoppingList.addItems(itemsIds);
-    console.log({ itemsIds });
-
-    console.log({ newShoppingList });
-    res.status(201).send(true);
   } catch (error) {
     return res.status(500).send({ error: error.message || error });
   }
