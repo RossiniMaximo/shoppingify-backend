@@ -117,11 +117,12 @@ export const getShoppingListItems = async (req, res) => {
 export const addItemToShoplist = async (req, res) => {
   const shoppingListId = req.params.id;
   const { items } = req.body;
+  let newShoppingList;
 
   let itemsIds = [];
 
   try {
-    const shoppingList: any = await Shoplist.findOne({
+    const shoppingList = await Shoplist.findOne({
       where: {
         id: shoppingListId,
       },
@@ -129,6 +130,7 @@ export const addItemToShoplist = async (req, res) => {
     if (shoppingList === null) {
       throw { error: { message: "Shopping list not found." } };
     } else {
+      newShoppingList = shoppingList;
       await Promise.allSettled(
         items.map(async (i) => {
           let result = await Item.findOne({ where: { name: i } });
@@ -137,9 +139,9 @@ export const addItemToShoplist = async (req, res) => {
           } else {
             const itemDataValueId = result.getDataValue("id");
             console.log("itemDataValueId =", itemDataValueId);
-            let addNewItem = await shoppingList.addItem([result]);
+            console.log(shoppingList);
+            let addNewItem = await newShoppingList.addItem(result);
             console.log("add New ITem :", addNewItem);
-
             if (addNewItem) {
               return true;
             }
