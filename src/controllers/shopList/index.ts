@@ -138,18 +138,11 @@ export const addItemToShoplist = async (req, res) => {
             console.error("There wasn't a match");
           } else {
             const itemDataValueId = result.getDataValue("id");
-            console.log("itemDataValueId =", itemDataValueId);
-            console.log(shoppingList);
-            let addNewItem = await newShoppingList.addItem(result);
-            console.log("add New ITem :", addNewItem);
-            if (addNewItem) {
-              return true;
-            }
+            await newShoppingList.addItem({ itemDataValueId });
+            return result;
           }
         })
       );
-
-      /* await newShoppingList.addItems(itemsIds); */
       res.status(201).send(true);
     }
   } catch (error) {
