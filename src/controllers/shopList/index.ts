@@ -137,10 +137,7 @@ export const addItemToShoplist = async (req, res) => {
           } else {
             const itemDataValueId = result.getDataValue("id");
             console.log("itemDataValueId =", itemDataValueId);
-            let addNewItem = await shoppingList.addItem([
-              result,
-              itemDataValueId,
-            ]);
+            let addNewItem = await shoppingList.addItem([result]);
             console.log("add New ITem :", addNewItem);
 
             if (addNewItem) {
