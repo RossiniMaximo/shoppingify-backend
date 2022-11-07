@@ -128,9 +128,7 @@ export const addItemToShoplist = async (req, res) => {
       let result = await index.search(i, {
         attributesToRetrieve: ["objectID"],
       });
-      result.hits.map((item) => {
-        newShoppingList.addItem(Number(item.objectID));
-      });
+      result.hits.map((item) => newShoppingList.addItem(Number(item.objectID)));
     });
     res.status(201).send({ added: true, itemsIds });
   } catch (error) {
