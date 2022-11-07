@@ -1,23 +1,21 @@
 import { index } from "../../database/algolia";
 import { Item, Shoplist } from "../../models";
 
-// auth middleware
 export const createShoppingList = async (req, res) => {
   try {
     const { title, userId } = req.body;
-    console.log({ title });
-    console.log({ userId });
-    const [newShopList, created] = await Shoplist.findOrCreate({
-      where: { title, owner: userId },
-      defaults: { title, owner: userId },
+
+    const shoppingList = await Shoplist.create({
+      title: title,
+      owner: userId,
     });
-    return res.send(newShopList);
+
+    return res.send(shoppingList);
   } catch (error) {
     return { error: error.message };
   }
 };
 
-// auth middleware
 export const getMyShoppingLists = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -28,7 +26,6 @@ export const getMyShoppingLists = async (req, res) => {
   }
 };
 
-// auth middleware
 export const getShoppingListById = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -40,7 +37,7 @@ export const getShoppingListById = async (req, res) => {
     return res.send({ error: e.message });
   }
 };
-// auth middleware
+
 export const deleteShoppingListById = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -115,10 +112,9 @@ export const getShoppingListItems = async (req, res) => {
 };
 
 export const addItemToShoplist = async (req, res) => {
-  const shoppingListId = req.params.id;
-  const { items } = req.body;
+  const shoppingListId = Number(req.params.id);
+  const { items, userId } = req.body;
   let newShoppingList;
-
   let itemsIds = [];
 
   try {
@@ -127,26 +123,23 @@ export const addItemToShoplist = async (req, res) => {
         id: shoppingListId,
       },
     });
-    if (shoppingList === null) {
-      throw { error: { message: "Shopping list not found." } };
-    } else {
-      newShoppingList = shoppingList;
-      await Promise.allSettled(
-        items.map(async (i) => {
-          let result = await Item.findOne({ where: { name: i } });
-          if (result === null) {
-            console.error("There wasn't a match");
-          } else {
-            const itemDataValueId = result.getDataValue("id");
-            await newShoppingList.addItem({ itemDataValueId });
-            return result;
-          }
-        })
-      );
-      res.status(201).send(true);
-    }
+    newShoppingList = shoppingList;
   } catch (error) {
-    return res.status(500).send({ error: error.message || error });
+    console.log({ error });
+  }
+  try {
+    items.map(async (i) => {
+      let result = await index.search(i, {
+        attributesToRetrieve: ["objectID"],
+      });
+      result.hits.map((item) => {
+        newShoppingList.addItem(Number(item.objectID));
+      });
+    });
+    res.status(201).send({ added: true, itemsIds });
+  } catch (error) {
+    console.log({ error });
+    res.status(500).send({ error });
   }
 };
 
@@ -158,7 +151,6 @@ export const deleteItemFromShopList = async (req, res) => {
     let newList;
     newList = list;
     const newListItems = await newList.getItems();
-
     const result = newListItems.find((item) => {
       if (item.name == itemName) {
         return item;

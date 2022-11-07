@@ -18,9 +18,15 @@ User.hasMany(Shoplist, {
 Shoplist.belongsTo(User, {
   targetKey: "id",
 });
-Shoplist.belongsToMany(Item, { foreignKey: "owner", through: "list_item" });
+Shoplist.belongsToMany(Item, {
+  foreignKey: "shoppinglist_id",
+  through: "list_item",
+  uniqueKey: "false",
+});
 Item.belongsToMany(Shoplist, {
   through: "list_item",
+  foreignKey: "item_id",
+  uniqueKey: "false",
 });
 
 export { User, Item, Shoplist };

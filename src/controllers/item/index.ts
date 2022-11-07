@@ -90,7 +90,7 @@ export const createItem = async (req, res) => {
   }
 };
 
-export const updateItemsToAlgolia = async (req, res) => {
+export const updateItemsToAlgolia = async (_req, res) => {
   const items = await Item.findAll();
   const itemsForAlgolia = items.map((item: any) => {
     return {
