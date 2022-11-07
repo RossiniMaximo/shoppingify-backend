@@ -124,10 +124,6 @@ export const addItemToShoplist = async (req, res) => {
       },
     });
     newShoppingList = shoppingList;
-  } catch (error) {
-    console.log({ error });
-  }
-  try {
     items.map(async (i) => {
       let result = await index.search(i, {
         attributesToRetrieve: ["objectID"],
